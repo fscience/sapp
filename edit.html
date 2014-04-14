@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>编辑器</title>
+	<link href="http://cdn.staticfile.org/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+	
+	<style>
+	.textarea {
+	    background-color: #ffffff;
+	    border: 1px solid #cccccc;
+	    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	    -webkit-transition: border linear .2s, box-shadow linear .2s;
+	    -moz-transition: border linear .2s, box-shadow linear .2s;
+	    -o-transition: border linear .2s, box-shadow linear .2s;
+	    transition: border linear .2s, box-shadow linear .2s;
+	    padding: 4px 6px;
+	    font-size: 14px;
+	    line-height: 20px;
+	    color: #555555;
+	    -webkit-border-radius: 4px;
+	    -moz-border-radius: 4px;
+	    border-radius: 4px;
+	    vertical-align: middle;
+	    outline: none;
+	    height: 400px;
+	  }
+	  
+	.edit {width: 600px; height: 300px; text-align: left;}
+	</style>
+	
+	<script>
+	var content;
+	var edit;
+	window.onload = function(e) {
+		content = document.getElementById('content');
+		edit = document.getElementById('preview');
+		edit.onkeydown = function(e) {
+			var keynum
+			var keychar
+			var numcheck
+
+			if(window.event) { // IE, webkit
+				keynum = e.keyCode
+			} else if(e.which) { // Netscape/Firefox/Opera
+				keynum = e.which
+			}
+
+			keychar = String.fromCharCode(keynum)
+			
+			//alert(keychar);
+		}
+		edit.onkeyup = function() {
+			content.textContent = edit.innerHTML;
+		}
+		
+		var tools = document.getElementById("toolbar").getElementsByTagName("a");
+		for(tool in tools) {
+			tools[tool].onclick = function(e) {
+				edit.focus();
+				
+				document.execCommand('Bold');
+				//if (document.queryCommandState("bold") === false)
+				//	document.execCommand("bold", "false", undefined);
+				
+				e.preventDefault();
+				e.stopPropagation();
+			}
+		}
+	}
+	</script>
+</head>
+<body align="center">
+	<div align="center">
+		<textarea id="content"></textarea>
+		<div id="edit">
+			<div id="toolbar" class="toolbar">
+				<a href="#" data-action="bold" class="qe-bold"><span class="icon-bold" title="Bold"></span></a>
+			</div>
+			<div id="preview" class="edit textarea" contenteditable="true">
+			</div>
+		</div>
+	</div>
+</body>
+</html>

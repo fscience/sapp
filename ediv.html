@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>Edit DIV</title>
+
+	<style type="text/css">
+	.ediv {width: 600px; height: 300px; text-align: left; border: 1px solid #cccccc; border-radius: 4px; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); color: #555555; outline: none; padding: 4px 6px; float: left;}
+	</style>
+
+	<script type="text/javascript">
+	var sNewString = "new content associated with this object";
+	var vEdit;
+	var vInfo;
+
+	function insertText(obj, str) {
+		obj.focus();
+
+		if (document.selection) {
+			var sel = document.selection.createRange();
+			sel.text = str;
+		} else {
+			var sel = window.getSelection();
+			var befTxt = sel.anchorNode.textContent;
+			var start = sel.anchorOffset;
+			var end = sel.focusOffset;
+			sel.anchorNode.textContent = befTxt.substring(0, start) + str + befTxt.substring(end, befTxt.length);
+		}
+	}
+
+/*function insertText(obj,str) {
+	obj.focus();
+    if (document.selection) {
+        var sel = document.selection.createRange();
+        sel.text = str;
+    } else if (typeof obj.selectionStart === 'number' && typeof obj.selectionEnd === 'number') {
+        var startPos = obj.selectionStart,
+            endPos = obj.selectionEnd,
+            cursorPos = startPos,
+            tmpStr = obj.value;
+        obj.value = tmpStr.substring(0, startPos) + str + tmpStr.substring(endPos, tmpStr.length);
+        cursorPos += str.length;
+        obj.selectionStart = obj.selectionEnd = cursorPos;
+    } else {
+        obj.value += str;
+    }
+}*/
+
+	function onEditPaste() {
+		var clipboardData = (event.clipboardData || window.clipboardData);
+		//vInfo.innerText = clipboardData.getData("text/html");
+clipboardData.setData("text", "Hello.....");
+		//insertText(vEdit, clipboardData.getData("text"));
+
+		//event.returnValue = false;
+	}
+
+	window.onload = function () {
+		vEdit = document.getElementById("vEdit");
+		vInfo = document.getElementById("vInfo");
+
+		//vEdit.onpaste = onEditPaste;
+		vEdit.onbeforepaste = onEditPaste;
+	}
+
+/*
+var EventUtil = {
+    addHandler: function (element, type, handler) {
+        if (element.addEventListener) {
+            element.addEventListener(type, handler, false);
+        } else if (element.attachEvent) {
+            element.attachEvent("on" + type, handler);
+        } else {
+            element["on" + type] = handler;
+        }
+    },
+    getEvent: function (event) {
+        return event ? event : window.event;
+    },
+    getClipboardText: function (event) {
+        var clipboardData = (event.clipboardData || window.clipboardData);
+        return clipboardData.getData("text");
+    },
+    setClipboardText: function (event, value) {
+        if (event.clipboardData) {
+            return event.clipboardData.setData("text/plain", value);
+        } else if (window.clipboardData) {
+            return window.clipboardData.setData("text", value);
+        }
+    },
+    preventDefault: function (event) {
+        if (event.preventDefault) {
+            event.preventDefault();
+        } else {
+            event.returnValue = false;
+        }
+    }
+};
+*/
+	</script>
+</head>
+<body>
+<div contenteditable="true" class="ediv" id="vEdit">Paste here</div>
+ <div id="vInfo">RESULT</div>
+ </body>
+</html>

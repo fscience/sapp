@@ -1,0 +1,51 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html ng-app="scotchApp">
+<head>
+	<title>Fscience Home</title>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	
+	<!-- SCROLLS -->
+	<!-- load bootstrap and fontawesome via CDN -->
+	<link rel="stylesheet" href="css/bootstrap.css" />
+	<link rel="stylesheet" href="css/main.css">
+
+	<!-- SPELLS -->
+	<!-- load angular via CDN -->
+	<script src="js/angular/angular.js"></script>
+	<script src="js/angular/angular-route.js"></script>
+	<script src="js/angular/angular-resource.js"></script>
+	<script src="js/angular/angular-animate.js"></script>
+	<script src="js/angular/angular-sanitize.js"></script>
+	<script src="js/script.js"></script>
+	<script src="js/write.js"></script>
+</head>
+<body>
+	<!-- HEADER AND NAVBAR -->
+	<div class="topbar">
+		<div class="topbar-head">
+			<b>Fscience Home</b>
+		</div>
+		<ul class="topbar-nav">
+			<li><a href="#/write"><span class="glyphicon glyphicon-edit"></span></a></li>
+		</ul>
+		<ul class="topbar-nav topbar-right">
+			<li><a href="#"><span class="glyphicon glyphicon-envelope"></span></a></li>
+			<li>周日 下午8:44</li>
+			<li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;未登录</a></li>
+			<li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+			<li><a href="#"><span class="glyphicon glyphicon-list"></span></a></li>
+		</ul>
+	</div>
+	
+	<!-- MAIN CONTENT AND INJECTED VIEWS -->
+	<div class="container">
+		<div ng-view class="content"></div>
+	</div>
+		
+	<script>
+	//document.getElementById("markdown").innerHTML = markdown.toHTML("## Hello ## \nThis is a demo. \n\nTest....");
+	</script>
+</body>
+</html>
+
